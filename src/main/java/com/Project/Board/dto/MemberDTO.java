@@ -1,5 +1,6 @@
 package com.Project.Board.dto;
 
+import com.Project.Board.entity.MemberEntity;
 import lombok.*;
 
 @Getter
@@ -9,7 +10,17 @@ import lombok.*;
 @ToString
 public class MemberDTO {
     private long id;
-    private String userId;
-    private String userPassword;
-    private String userEmail;
+    private String memberId;
+    private String memberPassword;
+    private String memberEmail;
+
+    public static MemberDTO toMemberDTO(MemberEntity memberEntity) {
+        MemberDTO memberDTO = new MemberDTO();
+        memberDTO.setId(memberEntity.getId());
+        memberDTO.setMemberId(memberEntity.getMemberId());
+        memberDTO.setMemberPassword(memberEntity.getMemberPassword());
+        memberDTO.setMemberEmail(memberEntity.getMemberEmail());
+
+        return memberDTO;
+    }
 }
