@@ -12,6 +12,7 @@ public class MemberDTO {
     private long id;
     private String memberId;
     private String memberPassword;
+    private String memberName;
     private String memberEmail;
 
     public static MemberDTO toMemberDTO(MemberEntity memberEntity) {
@@ -19,6 +20,7 @@ public class MemberDTO {
         memberDTO.setId(memberEntity.getId());
         memberDTO.setMemberId(memberEntity.getMemberId());
         memberDTO.setMemberPassword(memberEntity.getMemberPassword());
+        memberDTO.setMemberName(memberEntity.getMemberName());
         memberDTO.setMemberEmail(memberEntity.getMemberEmail());
 
         return memberDTO;
