@@ -23,11 +23,16 @@
 </table>
 
 <button onclick="writeReq()">글쓰기</button>
+<button onclick="pagingReq()">페이징목록</button>
 </body>
 <script>
 
 function writeReq(){ // --- const saveReq = () => {} 와 동일
     location.href = "/board/write";
+}
+
+function pagingReq(){
+    location.href = "/board/paging";
 }
 
 <!--const wirteReq = () => {-->
