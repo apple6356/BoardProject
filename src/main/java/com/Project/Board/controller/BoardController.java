@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -36,16 +37,18 @@ public class BoardController {
 
     // 글 작성
     @PostMapping("/write")
-    public String write(@ModelAttribute BoardDTO boardDTO) {
+    public String write(@ModelAttribute BoardDTO boardDTO) throws IOException {
         boardService.write(boardDTO);
         return "redirect:/board/";
     }
 
     @GetMapping("/{id}")
-    public String findById(@PathVariable(name = "id") Long id, Model model) {
+    public String findById(@PathVariable(name = "id") Long id, Model model,
+                           @PageableDefault(page = 1) Pageable pageable) {
         boardService.updateHits(id);    // 조회수 올림
         BoardDTO boardDTO = boardService.findById(id);
         model.addAttribute("board", boardDTO);
+        model.addAttribute("page", pageable.getPageNumber());
         return "post";
     }
 

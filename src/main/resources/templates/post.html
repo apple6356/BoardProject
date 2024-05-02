@@ -43,7 +43,8 @@
 
 function boardReq(){
     console.log("목록 요청");
-    location.href = "/board/";
+    const page = [[${page}]];
+    location.href = "/board/paging?page="+page;
 }
 
 function updateReq(){
