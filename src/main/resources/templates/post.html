@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>post</title>
+    <!-- jquery cdn -->
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 </head>
 <body>
 
@@ -31,15 +33,57 @@
         <th>contents</th>
         <td th:text="${board.boardContents}"></td>
     </tr>
+    <tr th:if="${board.fileAttached == 1}">
+        <th>image</th>
+        <td th:each="fileName: ${board.storedFileName}">
+            <img th:src="@{|/upload/${fileName}|}" alt="">
+        </td>
+    </tr>
 </table>
 
 <button onclick="boardReq()">게시판</button>
 <button onclick="updateReq()">수정</button>
 <button onclick="deleteReq()">삭제</button>
 
+<!-- 댓글 작성 부분 -->
+<div id="comment-write">
+    <input type="text" id="commentWriter" placeholder="작성자">
+    <input type="text" id="commentContents" placeholder="내용">
+    <button id="commnet-wirte-btn" onclick="commentWrite()">작성</button>
+</div>
+
+<!-- 댓글 출력 부분 -->
+<div id="comment-list">
+
+</div>
+
 </body>
 
 <script th:inline="javascript">
+
+const commentWrite = () => {
+    const writer = document.getElementById("commentWriter").value;
+    const contents = document.getElementById("commentContents").value;
+    console.log("작성자", writer);
+    console.log("내용", contents);
+    const id = [[${board.id}]];
+    $.ajax({
+        // 요청방식: post, 요청주소: /comment/save, 요청데이터: 작성자, 작성내용, 게시글번호
+        type: "post",
+        url: "/comment/save",
+        data: {
+            "commentWriter": writer,
+            "commentContents": contents,
+            "boardId": id
+        },
+        success: function(res) {
+            console.log("요청 성공", res);
+        },
+        error: function(err) {
+            console.log("실패", err);
+        }
+    });
+}
 
 function boardReq(){
     console.log("목록 요청");
