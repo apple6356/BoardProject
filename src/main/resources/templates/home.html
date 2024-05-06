@@ -13,14 +13,19 @@
         <a href="/member">회원 목록</a>
     </p>
     <p>
-        <button onclick="boardReq()">게시판</button>
+<!--        <button onclick="boardReq()">게시판</button>-->
+        <button onclick="pagingReq()">게시판</button>
     </p>
 </div>
 </body>
 <script>
 
-function boardReq(){
+function boardReq() {
     location.href = "/board/";
+}
+
+function pagingReq() {
+    location.href = "/board/paging";
 }
 
 <!--const boardReq = () => {-->
